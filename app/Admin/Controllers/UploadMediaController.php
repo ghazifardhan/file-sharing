@@ -76,6 +76,9 @@ class UploadMediaController extends Controller
         return Admin::grid(UploadMedia::class, function (Grid $grid) {
 
             $grid->id('ID')->sortable();
+            $grid->user()->name();
+            $grid->group()->group_name();
+            $grid->column('file_path');
 
             $grid->created_at();
             $grid->updated_at();
