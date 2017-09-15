@@ -18,3 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('login', 'AuthController@login');
+Route::post('register', 'UserController@create');
+Route::post('upload', 'UploadMediaController@create');
