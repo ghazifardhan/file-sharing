@@ -20,45 +20,45 @@ class UploadMediaController extends Controller
 
     public function create(Request $request){
         
-        $file = $request->file('media');
-        //var_dump($file);
-        $res['file_name'] = $file->getClientOriginalName();
-        $res['mime_type'] = $file->getMimeType();
-        $res['size'] = $file->getSize();
-
-        return $res;
-
-        /*
         $disk = Storage::disk(config('filesystems.default'));
         $user = JWTAuth::parseToken()->authenticate();
         //Check the input data valid or not
         $error = array();
-       //Handle media file
-       if ($request->hasFile('media')) {
-                         $file = $request->file('media');
-                         //$path = $file->store('productmedia/'.$rand);
-                         $link = $disk->put($request->input('product_id'), $file, 'public');
-                         //return $link;
-                         $url = $disk->url($link);
-                         
-       }
-           $size = $file->getSize();
-           $this->upload_media->fill([
-                     'product_id' => $request->input('product_id'),
-                     'title' => $request->input('title'),
-                     'media_type' => $file->getMimeType(),
-                     'main_position' => $request->input('main_position'),
-                     'status' => $request->input('status'),
-                     'file_path' => $url, //Save to storage
-                     'file_size' => $size,
-                     'file_location' => 'google',
-                   ]);
-           if ($this->upload_media->save()) {
-               $res['success'] = true;
-               $res['result'] = 'Success add upload_media!';
+        //Handle media file
+        //if ($request->hasFile('media')) {
+        $file = $request->file('media');
+        $my_file = $_FILES['media'];
+        //$path = $file->store('productmedia/'.$rand);
+        $link = $disk->put("my_media/".$user->id, $file, 'public');
+        //return $link;
+        $url = $disk->url($link);
 
-               return response($res);
-           }
+        if($request->input('group_id') != NULL){
+            $group_id = $request->input('group_id');
+            $flag = 1;
+        } else {
+            $group_id = NULL;
+            $flag = 0;
+        }
+        
+        $this->upload_media->fill([
+                    'group_id' => $group_id,
+                    'user_id' => $user->id,
+                    'media_name' => $my_file['name'],
+                    'media_type' => $my_file['type'],
+                    'file_path' => $url, //Save to storage
+                    'file_location' => 'google',
+                    'file_size' => $my_file['size'],
+                    'flag' => $flag
+                ]);
+        if ($this->upload_media->save()) {
+            $res['success'] = true;
+            $res['result'] = 'Success add upload_media!';
+            $res['file'] = $file;
+            $res['upload_limit'] = ini_get('post_max_size');
+
+            return response($res);
+        }
         else {
            $error = $valid->errors();
            $res['success'] = false;
@@ -67,7 +67,6 @@ class UploadMediaController extends Controller
 
            return response($res);
        }
-       */
 
     }
 }

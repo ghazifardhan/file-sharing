@@ -19,6 +19,10 @@ class User extends Model
         'password' => 'required|min:6'
     ];
 
+    protected $hidden = [
+        'password', 'remember_token'
+    ];
+
     protected $msg = [
         'name.required' => 'Required',
         'name.min' => 'Min 6 character',

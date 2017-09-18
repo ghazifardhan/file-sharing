@@ -1,0 +1,4 @@
+
+Locate php.ini to edit post_max_size and upload_max_size
+
+sudo php -i | grep 'Configuration File'

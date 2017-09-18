@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
 use Illuminate\Support\Facades\Hash;
+use JWTAuth;
 
 use App\Models\User;
 
@@ -42,6 +43,23 @@ class UserController extends Controller
 
         return response($res);
 
+    }
+
+    public function search(Request $request){
+
+        $user = JWTAuth::parseToken()->authenticate();
+
+        $users = $this->user->where('email', $request->input('email'))->get();
+
+        if(count($users) > 0){
+            $res['success'] = true;
+            $res['data'] = $users;
+        } else {
+            $res['success'] = false;
+            $res['data'] = $users;
+        }
+
+        return response($res);
     }
 
     /**

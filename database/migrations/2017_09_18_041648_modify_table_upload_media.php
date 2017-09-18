@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersGroupTable extends Migration
+class ModifyTableUploadMedia extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateUsersGroupTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_group', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('group_id');
-            $table->integer('user_id');
-            $table->integer('role_id');
-            $table->timestamps();
+        Schema::table("upload_media", function($table){
+            $table->double('file_size')->after('file_location');
         });
     }
 
@@ -29,6 +25,8 @@ class CreateUsersGroupTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_group');
+        Schema::table("upload_media", function($table){
+            $table->dropColumn('file_size');
+        });
     }
 }

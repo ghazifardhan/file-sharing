@@ -9,7 +9,7 @@ class UploadMedia extends Model
     protected $table = 'upload_media';
 
     protected $fillable = [
-        'group_id', 'user_id', 'media_name', 'media_type', 'file_path', 'file_location', 'flag'
+        'group_id', 'user_id', 'media_name', 'media_type', 'file_path', 'file_location', 'file_size', 'flag'
     ];
 
     public function group(){
