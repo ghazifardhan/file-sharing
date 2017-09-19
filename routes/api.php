@@ -22,3 +22,6 @@ Route::post('register', 'UserController@create');
 Route::post('searchfriend', 'UserController@search');
 Route::post('upload', 'UploadMediaController@create');
 Route::get('my_media', 'UploadMediaController@index');
+Route::post('group_media', 'UploadMediaController@group_media');
+Route::post('group', 'GroupController@create');
+Route::get('group', 'GroupController@index');

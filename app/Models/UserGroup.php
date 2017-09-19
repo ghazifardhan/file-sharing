@@ -8,6 +8,10 @@ class UserGroup extends Model
 {
     protected $table = 'users_group';
 
+    protected $fillable = [
+        'group_id', 'user_id', 'role_id'
+    ];
+
     public function group(){
         return $this->belongsTo(Group::class);
     }

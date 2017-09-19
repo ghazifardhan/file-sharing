@@ -20,11 +20,24 @@ class UploadMediaController extends Controller
 
     public function index(Request $request){
 	
-	$user = JWTAuth::parseToken()->authenticate();
-	$file = $this->upload_media->where('user_id', $user->id)->get();
-	
-	$res['data'] = $file;
-	return response($res);
+        $user = JWTAuth::parseToken()->authenticate();
+        $file = $this->upload_media->where('user_id', $user->id)->get();
+        
+        $res['data'] = $file;
+        return response($res);
+    }
+
+    public function group_media(Request $request){
+
+        $user = JWTAuth::parseToken()->authenticate();
+        $file = $this->upload_media->where([
+            'user_id' => $user->id,
+            'group_id' => $request->input('group_id')
+            ])->get();
+
+        $res['data'] = $file;
+
+        return response($res);
     }
 
     public function create(Request $request){

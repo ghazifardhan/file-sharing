@@ -72,7 +72,7 @@ return [
             'storage_api_uri' => env('GOOGLE_CLOUD_STORAGE_API_URI'), // see: Public URLs below
 
             /*
-                Dont forget to add public in vendor/encore/laravel-admin/src/Form/File.php on line 120;
+                Dont forget to add public in vendor/encore/laravel-admin/src/Form/Field/File.php on line 120;
                 $path = $this->storage->putFileAs($this->getDirectory(), $file, $this->name, 'public');
             */
         ],
