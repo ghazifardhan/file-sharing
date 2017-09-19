@@ -18,6 +18,15 @@ class UploadMediaController extends Controller
         $this->upload_media = new UploadMedia();
     }
 
+    public function index(Request $request){
+	
+	$user = JWTAuth::parseToken()->authenticate();
+	$file = $this->upload_media->where('user_id', $user->id)->get();
+	
+	$res['data'] = $file;
+	return response($res);
+    }
+
     public function create(Request $request){
         
         $disk = Storage::disk(config('filesystems.default'));

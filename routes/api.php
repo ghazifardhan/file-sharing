@@ -21,3 +21,4 @@ Route::post('login', 'AuthController@login');
 Route::post('register', 'UserController@create');
 Route::post('searchfriend', 'UserController@search');
 Route::post('upload', 'UploadMediaController@create');
+Route::get('my_media', 'UploadMediaController@index');
