@@ -92,6 +92,11 @@ class RoleController extends Controller
 
             $form->display('id', 'ID');
             $form->text('role', 'Role');
+            // Use google map
+            $latitude = -6.210667;
+            $longitude = 106.715720;
+            $label = "Start";
+            $form->map($latitude, $longitude, $label)->useGoogleMap();
 
             $form->display('created_at', 'Created At');
             $form->display('updated_at', 'Updated At');
